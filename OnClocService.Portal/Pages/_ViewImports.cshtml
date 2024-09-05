@@ -1,0 +1,16 @@
+﻿@using Microsoft.Extensions.Options
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Localization
+@using OnClocService.Portal
+@using OnClocService.Core.Attributes
+@using OnClocService.Domain.DataModels.Systems
+@using OnClocService.Infrastructure.Services.Systems
+
+@namespace OnClocService.Portal.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@inject ApplicationOptionsService _ApplicationOptions
+@inject BusinessOptionsService _BusinessOptions
+@inject LicenseOptionsService _LicenseOptions
+@inject SupportOptionsService _SupportOptions
+@inject PageManagerService _PageManager

@@ -1,0 +1,13 @@
+﻿<div class="d-sm-flex justify-content-center justify-content-sm-between">
+    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">
+        @await _ApplicationOptions.GetFullName() <i class="mdi mdi-copyright"></i> @DateTime.Now.Year.ToString(), All rights Reserved |
+        @await _ApplicationOptions.GetShortName() <i class="mdi mdi-registered-trademark"></i> @await _ApplicationOptions.GetVersion(). <i class="mdi mdi-trademark"></i>
+        <a class="footer-copyright" href="@await _ApplicationOptions.GetCopyrightUrl()" target="_blank">Copyright</a> |
+        <a asp-area="" asp-page="Privacy" title="privacy statement">Privacy</a> |
+        <a href="@await _SupportOptions.GetLearnUrl()" target="_blank">Documentation</a>
+    </span>
+    <span class="float-none float-sm-end d-block mt-1 mt-sm-0 text-center">
+        For Support: <i class="mdi mdi-phone"></i> @await _SupportOptions.GetPhone() |
+        <i class="mdi mdi-email"></i> @await _SupportOptions.GetEmail()
+    </span>
+</div>

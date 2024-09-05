@@ -1,0 +1,30 @@
+﻿@page
+@model ListSettingsModel
+@{
+    var systemSettings = Model.SystemSettings;
+}
+
+@if(systemSettings is null)
+{
+    <div class="alert alert-fill-warning" role="alert">
+        <i class="ti-info-alt"></i>
+        Warning! System setting must be saved to view this list ...
+    </div>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <td>System Setting</td>
+                <td>Value</td>
+            </tr>
+        </thead>
+        @foreach(var setting in systemSettings)
+        {    <tr>
+                <td>@setting.Id</td>
+                <td>@setting.Value</td>
+            </tr>
+        }
+    </table>
+}

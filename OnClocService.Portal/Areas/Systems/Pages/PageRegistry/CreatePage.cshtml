@@ -1,0 +1,161 @@
+﻿@page
+@model CreatePageModel
+@{
+    var ModuleName = Model.PageLinks.ModuleName;
+    var ListPages = Model.PageLinks.ModulePages["ListPages"];
+}
+
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Page Details | enter new page details below to create a new navigation page</h4>
+        <form id="SystemsPageToCreate" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="table">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="mb-3 form-floating">
+                            <select asp-for="PageProfile.SystemsModuleId" class="form-control" asp-items="Model.ModulesList">
+                            </select>
+                            <label asp-for="PageProfile.SystemsModuleId" class="form-label"></label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3 form-floating">
+                            <input asp-for="PageProfile.ModuleFolder" class="form-control" />
+                            <label asp-for="PageProfile.ModuleFolder" class="form-label"></label>
+                            <span asp-validation-for="PageProfile.ModuleFolder" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="mb-3 form-floating">
+                            <input asp-for="PageProfile.PageName" class="form-control" />
+                            <label asp-for="PageProfile.PageName" class="form-label"></label>
+                            <span asp-validation-for="PageProfile.PageName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3 form-floating">
+                            <input asp-for="PageProfile.AspPage" class="form-control" />
+                            <label asp-for="PageProfile.AspPage" class="form-label"></label>
+                            <span asp-validation-for="PageProfile.AspPage" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-4">
+                        <div class="mb-3 form-floating">
+                            <input asp-for="PageProfile.PageTitle" class="form-control" />
+                            <label asp-for="PageProfile.PageTitle" class="form-label"></label>
+                            <span asp-validation-for="PageProfile.PageTitle" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="mb-3 form-floating">
+                            <input asp-for="PageProfile.PageDescription" class="form-control" />
+                            <label asp-for="PageProfile.PageDescription" class="form-label"></label>
+                            <span asp-validation-for="PageProfile.PageDescription" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-3">
+                        <div class="mb-3 form-floating">
+                            <input asp-for="PageProfile.IconClass" class="form-control" />
+                            <label asp-for="PageProfile.IconClass" class="form-label"></label>
+                            <span asp-validation-for="PageProfile.IconClass" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <div class="">
+                            <div class="d-inline form-group float-end">
+                                <div class="form-check-inline mb-3">
+                                    <input type="checkbox" asp-for="PageProfile.EnableMenuItem" class="form-check-input" />
+                                    <label class="form-check-label small">
+                                        @Html.DisplayNameFor(model => model.PageProfile.EnableMenuItem)
+                                    </label>
+                                </div>
+                                <div class="form-check-inline mb-3">
+                                    <input type="checkbox" asp-for="PageProfile.ShowInMenu" class="form-check-input" />
+                                    <label class="form-check-label small">
+                                        @Html.DisplayNameFor(model => model.PageProfile.ShowInMenu)
+                                    </label>
+                                </div>
+                                <div class="form-check-inline mb-3">
+                                    <input type="checkbox" asp-for="PageProfile.IsDefaultPage" class="form-check-input" />
+                                    <label class="form-check-label small">
+                                        @Html.DisplayNameFor(model => model.PageProfile.IsDefaultPage)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer">
+        <div class="g-2 p-2">
+            <div class="d-inline">
+                <a class="btn btn-outline-dark" asp-area="@ModuleName" asp-page="@ListPages.Url"
+                   data-bs-toggle="tooltip" data-bs-custom-class="bis-tooltip" data-bs-title="@ListPages.Description">
+                    <span><i class="fa-solid fa-chevron-left">&nbsp;</i></span>
+                </a>
+            </div>
+            <div class="d-inline form-group float-end">
+                <button class="btn btn-outline-info" type="button" data-bs-target="#batchUpload"
+                        data-bs-toggle="modal" data-bs-custom-class="bis-tooltip" data-bs-title="batch file upload">
+                    <span><i class="fa fa-solid fa-file-csv"></i>&nbsp;Batch</span>
+                </button>
+                <button class="btn btn-outline-success" type="submit" form="SystemsPageToCreate" asp-page-handler="Create"
+                        data-bs-toggle="tooltip" data-bs-custom-class="bis-tooltip" data-bs-title="save new page">
+                    <span><i class="fa-solid fa-floppy-disk"></i>&nbsp;Save</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Batch File Upload -->
+<div id="batchUpload" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-5" id="exampleModalLabel">Upload Batch</h5>
+                <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="batchUploadForm">
+                    <div class="form-group">
+                        <label class="form-label">Select batch file to Upload:</label>
+                        <input class="form-control" type="file" value="file" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="icon-link icon-link-hover" href="#"
+                   data-bs-toggle="tooltip" data-bs-custom-class="bis-tooltip" data-bs-title="download a batch file template">
+                    <span><i class="fa-solid fa-download">&nbsp;</i></span>Download Batch File
+                </a>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+                        data-bs-toggle="tooltip" data-bs-custom-class="bis-tooltip" data-bs-title="close and return add page">
+                    <span><i class="fa-solid fa-xmark"></i></span>
+                </button>
+                <button type="button" class="btn btn-outline-success"
+                        data-bs-toggle="tooltip" data-bs-custom-class="bis-tooltip" data-bs-title="upload batch file">
+                    <span><i class="fa-solid fa-upload">&nbsp;</i></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

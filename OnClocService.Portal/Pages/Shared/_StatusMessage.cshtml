@@ -1,0 +1,30 @@
+﻿
+@{
+    var statusIcon = "";
+    var statusHeading = "";
+    var feedbackMessage = "";
+    if (TempData["StatusMessage"] != null)
+    {
+        var postedMessage = TempData["StatusMessage"];
+        if(postedMessage != null)
+        {
+            var resultMessage = postedMessage.ToString();
+            if(resultMessage != null)
+            {
+                var statusMessage = resultMessage.Split(':');
+                statusHeading = statusMessage[0];
+                statusIcon = statusHeading.ToLower();
+                feedbackMessage = statusMessage[1];
+            }
+        }
+    }
+}
+
+@section Scripts {
+    var icon = '@statusIcon';
+    var heading = '@statusHeading';
+    var feedback = '@feedbackMessage';
+    if (feedback === '') {
+        showStatusMessage(icon, heading, feedback);
+    }
+}

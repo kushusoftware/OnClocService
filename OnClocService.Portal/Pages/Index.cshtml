@@ -1,0 +1,495 @@
+﻿@page
+@model IndexModel
+@{
+
+}
+
+<partial name="_PageTabs" />
+
+<div class="tab-content tab-content-basic">
+    <!-- # Tab Overview -->
+    <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
+        <div class="row">
+            <div class="col-lg-8 d-flex flex-column">
+                <div class="row flex-grow">
+                    <div class="col-12 col-lg-4 col-lg-12 grid-margin stretch-card">
+                        <div class="card card-rounded">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h4 class="modern-user-intro">Quick Action Links ...</h4>
+                                        <h6 class="mdern-welcome-text">here are some links to get you started</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="bg-opacity-primary mb-2 mb-lg-0">
+                                            <i class="mdi mdi-briefcase-plus"></i>
+                                            <p>Start a New Project</p>
+                                            <div class="text-end">
+                                                <i class="mdi mdi-arrow-right"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="bg-opacity-success mb-2 mb-lg-0">
+                                            <i class="mdi mdi-ticket-confirmation"></i>
+                                            <p>Convert Tickets to Jobs Cards</p>
+                                            <div class="text-end">
+                                                <i class="mdi mdi-arrow-right"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="bg-opacity-info mb-2 mb-lg-0">
+                                            <i class="mdi mdi-account-wrench"></i>
+                                            <p>Assign Technicians Jobs</p>
+                                            <div class="text-end">
+                                                <i class="mdi mdi-arrow-right"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="bg-opacity-danger mb-2 mb-lg-0">
+                                            <i class="mdi mdi-progress-wrench"></i>
+                                            <p>Stock up Spare Parts</p>
+                                            <div class="text-end">
+                                                <i class="mdi mdi-arrow-right"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 d-flex flex-column">
+                <div class="row flex-grow">
+                    <div class="col-12 col-lg-4 col-lg-12 grid-margin stretch-card">
+                        <div class="card card-rounded">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h4 class="card-title card-title-dash">Revenue Growth</h4>
+                                        <p class="text-small modern-color-999">Weekly report</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="revenue-growth-value">$2,000</h4>
+                                        <h4 class="revenue-growth-percentage">+12.6%</h4>
+                                    </div>
+                                </div>
+                                <div class="chartjs-wrapper mt-4 chart-height-modern">
+                                    <canvas id="modernRevenueGrowth"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row flex-grow">
+            <div class="col-lg-3 d-flex flex-column  grid-margin stretch-card">
+                <div class="card card-rounded">
+                    <div class="card-body">
+                        <div>
+                            <h4 class="card-title card-title-dash">Statistics</h4>
+                            <div class="wrapper d-flex align-items-center flex-w-100 py-4 border-bottom">
+                                <div class="rounded-icon bg-danger">
+                                    <i class="mdi mdi-arrow-down-bold-circle-outline"></i>
+                                </div>
+                                <div class="wrapper ms-3">
+                                    <small class="text-muted mb-0 statistics-text">Send</small>
+                                    <p class="mb-1 fw-bold statistics-value">$5678.99</p>
+                                </div>
+                            </div>
+                            <div class="wrapper d-flex align-items-center flex-w-100 py-4 border-bottom">
+                                <div class="rounded-icon bg-success">
+                                    <i class="mdi mdi-arrow-up-bold-circle-outline"></i>
+                                </div>
+                                <div class="wrapper ms-3">
+                                    <small class="text-muted mb-0 statistics-text">Received</small>
+                                    <p class="mb-1 fw-bold statistics-value">$5678.99</p>
+                                </div>
+                            </div>
+                            <div class="wrapper d-flex align-items-center flex-w-100 py-4 pb-2">
+                                <div class="rounded-icon bg-primary"><i class="mdi mdi-information-outline"></i></div>
+                                <div class="wrapper ms-3">
+                                    <small class="text-muted mb-0 statistics-text">Pending</small>
+                                    <p class="mb-1 fw-bold statistics-value">$5678.99</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 d-flex flex-column  grid-margin stretch-card">
+                <div class="card card-rounded">
+                    <div class="card-body pb-5">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h4 class="card-title card-title-dash">Transaction Status</h4>
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn btn-outline-light border dropdown-toggle toggle-dark btn-lg mb-0 me-0"
+                                        type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                    Year
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+                                    <h6 class="dropdown-header">week Wise</h6>
+                                    <a class="dropdown-item" href="#">Year Wise</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chartjs-wrapper mt-4 bubble-chart-height">
+                            <canvas id="modernBubble"></canvas>
+                            <div id="modernBubble-legend" class="text-center mt-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 d-flex flex-column  grid-margin stretch-card">
+                <div class="row flex-grow">
+                    <div class="col-12 col-lg-4 col-lg-12 stretch-card">
+                        <div class="card card-rounded">
+                            <div class="card-body  modern-payment">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h4 class="card-title card-title-dash">Upcoming Payments</h4>
+                                        <p class="text-small modern-color-999">Information about payments</p>
+                                    </div>
+                                </div>
+                                <div class="wrapper d-flex align-items-center justify-content-between py-3">
+                                    <div class="d-flex align-items-center">
+                                        <div class="payment-circle-primary"></div>
+                                        <div class="wrapper mb-0 ms-3">
+                                            <p class="payment-title mb-0">Electricity</p>
+                                        </div>
+                                    </div>
+                                    <div class="payment-amount">
+                                        $5678.99
+                                    </div>
+                                </div>
+                                <div class="wrapper d-flex align-items-center justify-content-between py-3">
+                                    <div class="d-flex align-items-center">
+                                        <div class="payment-circle-info"></div>
+                                        <div class="wrapper mb-0 ms-3">
+                                            <p class="payment-title mb-0">Water</p>
+                                        </div>
+                                    </div>
+                                    <div class="payment-amount">
+                                        $2468.21
+                                    </div>
+                                </div>
+                                <div class="wrapper d-flex align-items-center justify-content-between py-3">
+                                    <div class="d-flex align-items-center">
+                                        <div class="payment-circle-danger"></div>
+                                        <div class="wrapper mb-0 ms-3">
+                                            <p class="payment-title mb-0">House Loan</p>
+                                        </div>
+                                    </div>
+                                    <div class="payment-amount">
+                                        $7866.89
+                                    </div>
+                                </div>
+                                <div class="wrapper d-flex align-items-center justify-content-between py-3">
+                                    <div class="d-flex align-items-center">
+                                        <div class="payment-circle-success"></div>
+                                        <div class="wrapper mb-0 ms-3">
+                                            <p class="payment-title mb-0">Insurance</p>
+                                        </div>
+                                    </div>
+                                    <div class="payment-amount">
+                                        $6541.39
+                                    </div>
+                                </div>
+                                <a href="#" class="more-options-payment d-flex align-items-center">
+                                    More Payments <i class="mdi mdi-chevron-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 d-flex flex-column grid-margin stretch-card">
+                <div class="card card-rounded">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h4 class="card-title card-title-dash">Money Flow</h4>
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn btn-outline-light border dropdown-toggle toggle-dark btn-lg mb-0 me-0"
+                                        type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                    Year
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+                                    <h6 class="dropdown-header">week Wise</h6>
+                                    <a class="dropdown-item" href="#">Year Wise</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="money-flow">
+                            <div class="d-flex align-items-center">
+                                <div class="money-flow-icon-wrapper">
+                                    <i class="mdi mdi-pig"></i>
+                                </div>
+                                <div>
+                                    <p class="total-balance">Total balance</p>
+                                    <h5 class="total-balance-amount">$52,648.85</h5>
+                                </div>
+                            </div>
+                            <div class="chartjs-wrapper mt-4 modern-money-flow-height">
+                                <canvas class="my-auto" id="moneyFlow"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 d-flex flex-column grid-margin stretch-card">
+                <div class="card card-rounded">
+                    <div class="card-body">
+                        <h4 class="card-title card-title-dash">Recent Transactions</h4>
+                        <div class="modern-recent-transaction">
+                            <div class="wrapper d-flex align-items-center justify-content-between py-2 border-bottom">
+                                <div class="d-flex">
+                                    <img class="img-sm rounded" src="~/img/profile/pictures/face31.jpg"
+                                         alt="profile">
+                                    <div class="wrapper ms-3">
+                                        <p>Isabella Becker</p>
+                                        <small>23 mins ago</small>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="text-end">
+                                        <i class="mdi mdi-arrow-top-right text-danger"></i>
+                                    </div>
+                                    <div class="amount">$2,000</div>
+                                </div>
+                            </div>
+                            <div class="wrapper d-flex align-items-center justify-content-between py-2 pt-3 border-bottom">
+                                <div class="d-flex">
+                                    <img class="img-sm rounded" src="~/img/profile/pictures/face32.jpg"
+                                         alt="profile">
+                                    <div class="wrapper ms-3">
+                                        <p>Alex Mike</p>
+                                        <small>1 day ago</small>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="text-end">
+                                        <i class="mdi mdi-arrow-bottom-left text-success"></i>
+                                    </div>
+                                    <div class="amount">$1,080</div>
+                                </div>
+                            </div>
+                            <div class="wrapper d-flex align-items-center justify-content-between py-2 border-bottom">
+                                <div class="d-flex">
+                                    <img class="img-sm rounded" src="~/img/profile/pictures/face33.jpg"
+                                         alt="profile">
+                                    <div class="wrapper ms-3">
+                                        <p>Dora Jain</p>
+                                        <small>1 day ago</small>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="text-end">
+                                        <i class="mdi mdi-arrow-bottom-left text-success"></i>
+                                    </div>
+                                    <div class="amount">$2,250</div>
+                                </div>
+                            </div>
+                            <div class="wrapper d-flex align-items-center justify-content-between py-2 border-bottom">
+                                <div class="d-flex">
+                                    <img class="img-sm rounded" src="~/img/profile/pictures/face34.jpg"
+                                         alt="profile">
+                                    <div class="wrapper ms-3">
+                                        <p>Gelly Rich</p>
+                                        <small>4 days ago</small>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="text-end">
+                                        <i class="mdi mdi-arrow-top-right text-danger"></i>
+                                    </div>
+                                    <div class="amount">$1,200</div>
+                                </div>
+                            </div>
+                            <div class="wrapper d-flex align-items-center justify-content-between py-2">
+                                <div class="d-flex">
+                                    <img class="img-sm rounded" src="~/img/profile/pictures/face35.jpg"
+                                         alt="profile">
+                                    <div class="wrapper ms-3">
+                                        <p>Zain Malik</p>
+                                        <small>5 days ago</small>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="text-end">
+                                        <i class="mdi mdi-arrow-bottom-left text-success"></i>
+                                    </div>
+                                    <div class="amount">$2,680</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 d-flex flex-column">
+                <div class="row flex-grow">
+                    <div class="col-12 col-lg-4 col-lg-12 grid-margin stretch-card">
+                        <div class="card card-rounded">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h4 class="card-title card-title-dash">Liability Overview</h4>
+                                        <p class="text-small modern-color-999">Information about your liabilities</p>
+                                    </div>
+                                </div>
+                                <div class="chartjs-wrapper mt-2">
+                                    <div id="modernChartliability-legend" class="mb-3"></div>
+                                    <canvas class="my-auto chart-modern-liability-height"
+                                            id="modernChartliability"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 d-flex flex-column">
+                <div class="row flex-grow">
+                    <div class="col-12 col-lg-4 col-lg-12 grid-margin stretch-card">
+                        <div class="card card-rounded">
+                            <div class="card-body">
+                                <h4 class="card-title card-title-dash">All Accounts</h4>
+
+                                <div class="table-responsive  mt-1">
+                                    <table class="table table-analytic">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <p class="text-999999">Account type</p>
+                                                </th>
+                                                <th>
+                                                    <p class="text-999999">Status</p>
+                                                </th>
+                                                <th>
+                                                    <p class="text-999999">Currency</p>
+                                                </th>
+                                                <th>
+                                                    <p class="text-999999">Total balance</p>
+                                                </th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <p class="text-black">Current status</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-success">Active</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-black"></p>USD</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-black">U$52,648.85</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-black"><i class="mdi mdi-dots-vertical text-999999"></i></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p class="text-black"></p>Current status</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-success">Active</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-black"></p>USD</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-black"></p>>U$52,648.85</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-black"></p><i class="mdi mdi-dots-vertical text-999999"></i>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p class="text-black"></p>Current status</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-success">Active</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-black"></p>USD</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-black"></p>>U$52,648.85</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-black"></p><i class="mdi mdi-dots-vertical text-999999"></i>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p class="text-black"></p>Current status</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-success">Active</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-black"></p>USD</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-black"></p>>U$52,648.85</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-black"></p><i class="mdi mdi-dots-vertical text-999999"></i>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p class="text-black"></p>Current status</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-success">Active</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-black"></p>USD</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-black"></p>>U$52,648.85</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-black"></p><i class="mdi mdi-dots-vertical text-999999"></i>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- End Overview # -->
+    <div class="tab-pane fade" id="listings" role="tabpanel" aria-labelledby="listings">Listings....</div>
+    <div class="tab-pane fade" id="reports" role="tabpanel" aria-labelledby="reports">Reports...</div>
+</div>

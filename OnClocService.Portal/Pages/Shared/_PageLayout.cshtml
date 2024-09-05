@@ -1,0 +1,88 @@
+﻿@{
+    var language = "en";
+    var culture = Context.Features.Get<IRequestCultureFeature>();
+    if (culture != null)
+    {
+        language = culture.RequestCulture.UICulture.TwoLetterISOLanguageName;
+    }
+    var currentPageTitle = _PageManager.GetPageTitle(ViewContext);
+}
+
+<!DOCTYPE html>
+<html lang="@language">
+<head>
+    <base href="~/" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>@currentPageTitle | @await _ApplicationOptions.GetFullName() </title>
+    <!-- # Icons -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+    <!-- # Plugins : CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/lib/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="~/lib/jquery-toast/jquery.toast.min.css" />
+    <link rel="stylesheet" href="~/lib/typicons/typicons.min.css" />
+    <link rel="stylesheet" href="~/lib/simple-line-icons/css/simple-line-icons.min.css" />
+    <link rel="stylesheet" href="~/lib/themify-icons/themify-icons.css" />
+    <!-- # Custom : CSS -->
+    @await RenderSectionAsync("Styles", required: false)
+    <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
+</head>
+<body class="sidebar-icon-only with-welcome-text">
+    <div class="container-scroller">
+        <header>
+            <!-- # Page Header -->
+            <partial name="_PageHeader" />
+            <!-- End Header # -->
+        </header>
+        <div class="container-fluid page-body-wrapper">
+            <aside>
+                <!-- # Sidebar -->
+                <partial name="_PageSidebar" />
+                <!-- End Sidebar # -->
+            </aside>
+            <main class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <!-- # Page Title -->
+                            <partial name="_PageTitlebar" />
+                            <!-- End Titlebar # -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="home-tab">
+                                @RenderBody()
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- # Page Footer -->
+                    <footer class="footer">
+                        <partial name="_PageFooter" />
+                    </footer><!-- End Footer # -->
+            </main>
+        </div>
+    </div>
+
+    <!-- # Plugin : JS -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="~/lib/font-awesome/js/all.min.js"></script>
+    <script src="~/lib/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/lib/jquery-toast/jquery.toast.min.js"></script>
+    <script src="~/lib/chart/chart.umd.min.js"></script>
+    <script src="~/lib/progressbar/progressbar.min.js"></script>
+    <script src="~/lib/feather-icons/feather.min.js"></script>
+    <script src="~/lib/jquery-cookie/jquery.cookie.min.js"></script>
+    <!-- # Custom : JS -->
+    <script src="~/js/custom.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+

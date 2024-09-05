@@ -1,0 +1,21 @@
+﻿@page
+@inject IWebHostEnvironment hostingEnvironment
+@model AboutModel
+@{
+}
+
+<h2>On-Cloc by Kushu Software</h2>
+<p>License: @await _LicenseOptions.GetName()</p>
+<p>Expiry: @await _LicenseOptions.GetExpiry()</p>
+<p>----------</p>
+<p>Application: @await _ApplicationOptions.GetFullName()</p>
+<p>Version: @await _ApplicationOptions.GetVersion()</p>
+<p>@hostingEnvironment.ApplicationName is currently running in @hostingEnvironment.EnvironmentName environment.</p>
+<!-- <snippet_Environment> -->
+<environment include="Development">
+    <div>Environment is Development</div>
+</environment>
+<environment exclude="Development">
+    <div>Environment is Production</div>
+</environment>
+<!-- </snippet_Environment> -->

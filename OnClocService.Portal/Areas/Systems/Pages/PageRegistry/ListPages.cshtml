@@ -1,0 +1,184 @@
+﻿@page
+@model ListPagesModel
+@{
+    int numOfPages = Model.ListPages.TotalPages;
+    int nextPageIndex = Model.ListPages.PageIndex + 1;
+    int prevPageIndex = Model.ListPages.PageIndex - 1;
+    var nextBtnDisabled = !Model.ListPages.HasNextPage ? "disabled" : "";
+    var prevBtnDisabled = !Model.ListPages.HasPreviousPage ? "disabled" : "";
+    var ModuleName = Model.PageLinks.ModuleName;
+    var ThisPage = Model.PageLinks.ModulePages["ListPages"];
+    var ShowPage = Model.PageLinks.ModulePages["ShowPage"];
+    var CreatePage = Model.PageLinks.ModulePages["CreatePage"];
+    var ModifyPage = Model.PageLinks.ModulePages["ModifyPage"];
+    var RemovePage = Model.PageLinks.ModulePages["RemovePage"];
+}
+
+
+<div class="card">
+    <div class="card-header">
+        <a class="d-inline icon" asp-area="@ModuleName" asp-page="@CreatePage.Url"
+           data-bs-toggle="tooltip" data-bs-title="@CreatePage.Description">
+            <i class="mdi mdi-file-document-plus-outline"></i>
+            <span>&nbsp;@CreatePage.Title</span>
+        </a>
+        <div class="d-inline search-bar float-end">
+            <form class="search-form d-flex align-items-center" method="get" asp-area="@ModuleName" asp-page="@ThisPage.Url"
+                  data-bs-toggle="tooltip" data-bs-title="search for display name or page file">
+                <input class="rounded-start" type="text" name="findBy" value="@Model.PageFilter" placeholder="search" />
+                <button class="rounded-end" type="submit" title="search"><i class="mdi mdi-magnify"></i></button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title d-inline">Pages | <span>@Model.ListPages.TotalItems found.</span></h4>
+        <!--    Header -->
+        <div class="filter d-inline float-end">
+            <a class="icon" href="#" data-bs-toggle="dropdown">
+                <span><i class="mdi mdi-dots-vertical">&nbsp;</i></span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                <li class="dropdown-header text-start">
+                    <h6>Filter</h6>
+                </li>
+                <li><a class="dropdown-item" asp-route-filterBy="hidden" asp-area="@ModuleName" asp-page="@ThisPage.Url">Hidden Pages</a></li>
+                <li><a class="dropdown-item" asp-route-filterBy="primary" asp-area="@ModuleName" asp-page="@ThisPage.Url">Default Pages</a></li>
+                <li><a class="dropdown-item" asp-route-filterBy="disabled" asp-area="@ModuleName" asp-page="@ThisPage.Url">Disabled Pages</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--    Main Body -->
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        <a asp-route-sortBy="@Model.PageNameSort" asp-route-filterBy="@Model.PageFilter"
+                           asp-area="@ModuleName" asp-page="@ThisPage.Url">
+                            <i class="fa-solid fa-sort">&nbsp;</i>
+                            @Html.DisplayNameFor(model => model.ListPages[0].Name)
+                        </a>
+                    </th>
+                    <th>
+                        <a asp-route-sortBy="@Model.PageFileSort" asp-route-filterBy="@Model.PageFilter"
+                           asp-area="@ModuleName" asp-page="@ThisPage.Url">
+                            <i class="fa-solid fa-sort">&nbsp;</i>
+                            @Html.DisplayNameFor(model => model.ListPages[0].AspPage)
+                        </a>
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ListPages[0].SystemsModule.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ListPages[0].ShowInMenu)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ListPages[0].EnableMenuItem)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ListPages[0].IsDefaultPage)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    if (Model.ListPages.Any())
+                    {
+                        foreach (var item in Model.ListPages)
+                        {
+                            <tr>
+                                <td>
+                                    <a asp-area="@ModuleName" asp-page="@ShowPage.Url" asp-route-id="@item.SystemsPageID"
+                                       title="@ShowPage.Description">
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AspPage)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SystemsModule.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ShowInMenu)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EnableMenuItem)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsDefaultPage)
+                                </td>
+                                <td>
+                                    <a class="icon" asp-area="@ModuleName" asp-page="@ModifyPage.Url" asp-route-id="@item.SystemsPageID"
+                                       data-bs-toggle="tooltip" data-bs-title="@ModifyPage.Description">
+                                        <span><i class="mdi mdi-square-edit-outline">&nbsp;</i></span>
+                                    </a> |
+                                    <a class="icon" asp-area="@ModuleName" asp-page="@RemovePage.Url" asp-route-id="@item.SystemsPageID"
+                                       data-bs-toggle="tooltip" data-bs-title="@RemovePage.Description">
+                                        <span><i class="mdi mdi-trash-can-outline">&nbsp;</i></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="7">
+                                <div class="alert alert-danger" role="alert">
+                                    <span class="align-middle">Sorry! no items match your request ...</span>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <!--    Footer -->
+    <div class="card-footer">
+        <nav>
+            <ul class="pagination justify-content-end">
+                <li class="page-item @prevBtnDisabled">
+                    <a class="page-link" asp-route-sortBy="@Model.PageNameSort"
+                       asp-route-filterBy="@Model.PageFilter" asp-route-pageIndex="@prevPageIndex">
+                        <span><i class="fa-solid fa-chevron-left">&nbsp;</i></span>
+                    </a>
+                </li>
+                @{
+                    int firstPage = 1;
+                    int maxShowPages = 9;
+                    int lastPage = numOfPages;
+                    int startPage = numOfPages - maxShowPages;
+                    if (startPage > 0)
+                    {
+                        firstPage = firstPage + (int)Math.Ceiling((decimal)(startPage / 2));
+                        lastPage = firstPage + maxShowPages;
+                    }
+                    int currentPage = Model.ListPages.PageIndex;
+                    for (int showPage = firstPage; showPage <= lastPage; showPage++)
+                    {
+                        string pageNumber = showPage.ToString();
+                        string activePage = (currentPage == showPage) ? "active" : "";
+                        <li class="page-item @activePage">
+                            <a class="page-link" asp-route-sortBy="@Model.PageNameSort" asp-route-filterBy="@Model.PageFilter"
+                               asp-route-pageIndex="@showPage.ToString()">@pageNumber</a>
+                        </li>
+                    }
+                }
+                <li class="page-item @nextBtnDisabled">
+                    <a class="page-link" asp-route-sortBy="@Model.PageNameSort"
+                       asp-route-filterBy="@Model.PageFilter" asp-route-pageIndex="@nextPageIndex">
+                        <span><i class="fa-solid fa-chevron-right">&nbsp;</i></span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+

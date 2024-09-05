@@ -1,0 +1,58 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Interfaces\Systems\ITicketManagerService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="8.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="8.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OnClocService.Core\OnClocService.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Requests\CustomerRegistry\" />
+    <Folder Include="Requests\EquipmentRegistry\" />
+    <Folder Include="Requests\PaymentRegistry\" />
+    <Folder Include="Requests\ProjectRegistry\" />
+    <Folder Include="Requests\Systems\" />
+    <Folder Include="Requests\TechnicianRegistry\" />
+    <Folder Include="Requests\TicketRegistry\" />
+    <Folder Include="Requests\TravelRegistry\" />
+    <Folder Include="Responses\CustomerRegistry\" />
+    <Folder Include="Responses\EquipmentRegistry\" />
+    <Folder Include="Responses\PaymentRegistry\" />
+    <Folder Include="Responses\ProjectRegistry\" />
+    <Folder Include="Responses\TechnicianRegistry\" />
+    <Folder Include="Responses\TicketRegistry\" />
+    <Folder Include="Responses\TravelRegistry\" />
+    <Folder Include="Validators\Systems\" />
+    <Folder Include="DataModels\CustomerRegistry\" />
+    <Folder Include="DataModels\EquipmentRegistry\" />
+    <Folder Include="DataModels\TravelRegistry\" />
+    <Folder Include="DataModels\TicketRegistry\" />
+    <Folder Include="DataModels\TechnicianRegistry\" />
+    <Folder Include="DataModels\ProjectRegistry\" />
+    <Folder Include="DataModels\PaymentRegistry\" />
+    <Folder Include="Interfaces\CustomerRegistry\" />
+    <Folder Include="Interfaces\EquipmentRegistry\" />
+    <Folder Include="Interfaces\TravelRegistry\" />
+    <Folder Include="Interfaces\TechnicianRegistry\" />
+    <Folder Include="Interfaces\ProjectRegistry\" />
+    <Folder Include="Interfaces\PaymentRegistry\" />
+  </ItemGroup>
+
+</Project>

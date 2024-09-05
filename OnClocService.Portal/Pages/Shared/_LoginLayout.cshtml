@@ -1,0 +1,90 @@
+﻿@{
+    var language = "en";
+    var culture = Context.Features.Get<IRequestCultureFeature>();
+    if (culture != null)
+    {
+        language = culture.RequestCulture.UICulture.TwoLetterISOLanguageName;
+    }
+    var currentPageTitle = _PageManager.GetPageTitle(ViewContext);
+}
+
+<!DOCTYPE html>
+<html lang="@language">
+
+<head>
+    <base href="~/" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@currentPageTitle | @await _ApplicationOptions.GetFullName() </title>
+    <!-- # Icons -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+    <!-- # Plugins : JS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/lib/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="~/lib/jquery-toast/jquery.toast.min.css" />
+    <link rel="stylesheet" href="~/lib/typicons/typicons.min.css" />
+    <link rel="stylesheet" href="~/lib/simple-line-icons/css/simple-line-icons.min.css" />
+    <link rel="stylesheet" href="~/lib/themify-icons/themify-icons.css" />
+    <!-- # Custom : CSS -->
+    <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
+</head>
+
+<body class="login-body-bg">
+    <div class="container">
+        <main role="main" class="pb-1 container-fluid">
+            <section class="section min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+                <div class="container align-items-stretch auth auth-img-bg">
+                    <div class="row flex-grow justify-content-end">
+                        <div class="col-lg-8 col-md-6 d-flex flex-row justify-content-center login-half-bg">
+                            &nbsp;
+                        </div>
+                        <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column justify-content-center py-4">
+                                        <a class="logo flex-row align-items-center w-auto" asp-area="" asp-page="Index">
+                                            <img class="rounded-circle mx-auto d-block" src=@Url.Content(await _ApplicationOptions.GetIconUrl()) alt="@await _ApplicationOptions.GetShortName()" />
+                                        </a>
+                                        <span class="logo-caption">@await _ApplicationOptions.GetFullName()</span>
+                                    </div>
+                                    <h5 class="card-title text-center text-muted pb-0 fs-4">@currentPageTitle</h5>
+                                    @RenderBody()
+                                </div>
+                                <div class="card-footer footer credits">
+                                    <div class="text-muted footer-small-text text-center text-sm-left d-block d-sm-inline-block">
+                                            @await _ApplicationOptions.GetFullName() <i class="mdi mdi-copyright"></i> @DateTime.Now.Year.ToString(), All rights Reserved
+                                            <br />
+                                            @await _ApplicationOptions.GetShortName() <i class="mdi mdi-registered-trademark"></i> @await _ApplicationOptions.GetVersion(). <i class="mdi mdi-trademark"></i>
+                                            <br />
+                                            For Help: <i class="mdi mdi-phone"></i> @await _SupportOptions.GetPhone() | <i class="mdi mdi-email"></i> @await _SupportOptions.GetEmail()
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+ 
+    <!-- # Plugin : JS -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="~/lib/font-awesome/js/all.min.js"></script>
+    <script src="~/lib/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/lib/jquery-toast/jquery.toast.min.js"></script>
+    <script src="~/lib/chart/chart.umd.min.js"></script>
+    <script src="~/lib/progressbar/progressbar.min.js"></script>
+    <script src="~/lib/feather-icons/feather.min.js"></script>
+    <script src="~/lib/jquery-cookie/jquery.cookie.min.js"></script>
+    <!-- # Custom : JS -->
+    <script src="~/js/custom.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

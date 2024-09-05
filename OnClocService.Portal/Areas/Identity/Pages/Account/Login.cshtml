@@ -1,0 +1,37 @@
+﻿@page
+@model LoginModel
+
+@{
+
+}
+
+<form id="account" class="pt-3" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+    <div class="form-floating mb-3">
+        <input asp-for="LoginRequest.Email" class="form-control form-control-sm" autocomplete="username" aria-required="true" placeholder="name@on-cloc.app" autofocus />
+        <label asp-for="LoginRequest.Email" class="form-label">Email</label>
+        <span asp-validation-for="LoginRequest.Email" class="text-danger"></span>
+    </div>
+    <div class="form-floating mb-3">
+        <input asp-for="LoginRequest.Password" class="form-control form-control-sm" autocomplete="current-password" aria-required="true" placeholder="password" />
+        <label asp-for="LoginRequest.Password" class="form-label">Password</label>
+        <span asp-validation-for="LoginRequest.Password" class="text-danger"></span>
+    </div>
+    <div class="my-3 d-grid gap-2">
+        <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-success">Login</button>
+    </div>
+    <div class="justify-content-between align-items-center">
+        <div class="text-muted">
+            <p>
+                <a id="forgot-password" class="auth-link" asp-area="Identity" asp-page="/Account/ForgotPassword">Forgot your password?</a>
+            </p>
+            <p>
+                <a id="resend-confirmation" class="auth-link" asp-area="Identity" asp-page="/Account/ResendEmailConfirmation">Resend email confirmation</a>
+            </p>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,102 @@
+﻿@model Dictionary<string, NavigationMenuParentItem>
+@{
+    var parentItems = Model.Values;
+    var defaultModule = parentItems.Single(p => p.IsDefaultModule && p.IsParentMenuItem);
+}
+
+<ul class="nav">
+
+    <li class="nav-item">
+        <a class="nav-link" asp-area="" asp-page="Index" tabindex="@defaultModule.MenuItemIndex">
+            <i class="@defaultModule.ModuleIconClass menu-icon"></i>
+            <span class="menu-title">@defaultModule.ModuleName</span>
+        </a>
+    </li>
+
+    @{
+        var moduleItems = parentItems.Where(p => !p.IsDefaultModule && p.IsParentMenuItem);
+        var childModuleItems = parentItems.Where(p => !p.IsDefaultModule && !p.IsParentMenuItem);
+        foreach (NavigationMenuParentItem moduleItem in moduleItems)
+        {
+            string moduleId = moduleItem.MenuItemID;
+            string moduleMenuName = moduleItem.ModuleShortName + "-menu";
+
+            // Modules Start
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="@moduleMenuName" href="#@moduleMenuName" tabindex="@moduleItem.MenuItemIndex">
+                    <i class="@moduleItem.ModuleIconClass menu-icon"></i>
+                    <span class="menu-title">@moduleItem.ModuleName</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="@moduleMenuName">
+                    <ul class="nav flex-column sub-menu">
+
+                        @{
+                            var subModuleItems = childModuleItems.Where(m => m.MenuParentID == moduleId);
+                            if (subModuleItems.Any())
+                            {
+                                foreach (NavigationMenuParentItem subModuleItem in subModuleItems)
+                                {
+                                    <li class="sub-menu">
+                                        <i class="@subModuleItem.ModuleIconClass menu-icon"></i>
+                                        <span class="menu-title">@subModuleItem.ModuleName</span>
+                                    </li>
+                                    // Sub-Modules Start
+                                    if (subModuleItem.ChildMenuItems.Any())
+                                    {
+                                        // Sub-Module Pages Start
+                                        foreach (NavigationMenuChildItem childItem in subModuleItem.ChildMenuItems)
+                                        {
+                                            <li class="nav-item">
+                                                <a class="nav-link" asp-area="@childItem.MenuItemAspArea" asp-page="@childItem.MenuItemAspPage">
+                                                    @childItem.MenuItemName
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                }
+                            }
+                            // Module Pages Start
+                            var modulePageItems = moduleItem.ChildMenuItems;
+                            if (modulePageItems.Any())
+                            {
+                                foreach (NavigationMenuChildItem childItem in modulePageItems)
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="@childItem.MenuItemAspArea" asp-page="@childItem.MenuItemAspPage">
+                                            @childItem.MenuItemName
+                                        </a>
+                                    </li>
+                                }
+                            }
+                        }
+                    </ul>
+                </div>
+            </li>
+        }
+    }
+
+    <li class="nav-item nav-category">Get Help</li>
+    @{
+        var moreDefaultItems = defaultModule.ChildMenuItems.Where(d => !d.IsDefaultModuleItem);
+        if (moreDefaultItems.Any())
+        {
+            foreach (NavigationMenuChildItem childItem in moreDefaultItems)
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="@childItem.MenuItemAspArea" asp-page="@childItem.MenuItemAspPage">
+                        <i class="@childItem.MenuItemIconClass menu-icon"></i>
+                        <span class="menu-title">@childItem.MenuItemTitle</span>
+                    </a>
+                </li>
+            }
+        }
+    }
+    <li class="nav-item">
+        <a class="nav-link" href="https://learn.on-cloc.app/" target="_blank">
+            <i class="menu-icon mdi mdi-file-document"></i>
+            <span class="menu-title">Documentation</span>
+        </a>
+    </li>
+
+</ul>

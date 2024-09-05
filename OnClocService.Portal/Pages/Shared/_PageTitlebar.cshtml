@@ -1,0 +1,39 @@
+﻿@{
+    PageNavigation pageNav = _PageManager.GetPageCustomization(ViewContext);
+}
+
+<nav style="--bs-breadcrumb-divider: '|';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a role="link" asp-area="" asp-page="Index">
+                <img width="16" height="16" src="@Url.Content(pageNav.ModuleImgUrl)" />
+            </a>
+        </li>
+        @{
+            foreach (var linkItem in pageNav.BreadcrumbItems)
+            {
+                string description = "";
+                string iconClass = linkItem.PageIconClass;
+                if (linkItem.IsActivePage)
+                {
+                    description = ": " + linkItem.PageDescription;
+                    <li class="breadcrumb-item">
+                        <i class="@iconClass"></i>
+                        @linkItem.PageTitle @description
+                    </li>
+                }
+                else
+                {
+                    string? aspArea = linkItem.AspArea;
+                    string aspPage = linkItem.AspPage;
+                    <li class="breadcrumb-item">
+                        <i class="@iconClass"></i>
+                        <a role="link" asp-area="@aspArea" asp-page="@aspPage">
+                            @linkItem.PageTitle @description
+                        </a>
+                    </li>
+                }
+            }
+        }
+    </ol>
+</nav>

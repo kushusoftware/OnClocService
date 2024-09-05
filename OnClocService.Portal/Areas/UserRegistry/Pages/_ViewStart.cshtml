@@ -1,0 +1,10 @@
+﻿@{
+    if (ViewData.TryGetValue("PageLayout", out var mainLayout) && mainLayout != null)
+    {
+        Layout = mainLayout.ToString();
+    }
+    else
+    {
+        Layout = "_PageLayout";
+    }
+}

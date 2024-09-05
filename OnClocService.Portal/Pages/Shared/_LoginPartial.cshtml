@@ -1,0 +1,139 @@
+﻿@using OnClocService.Core.Entities.UserRegistry
+
+@inject SignInManager<SystemsUser> SignInManager
+@inject UserManager<SystemsUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    // Get the Current Loggedin User
+    var currentUser = await UserManager.GetUserAsync(User);
+    if (currentUser != null)
+    {
+        // Notifications
+        <li class="nav-item dropdown">
+            <a class="nav-link count-indicator" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                <i class="mdi mdi-bell-outline icon-lg"></i>
+                <span class="count"></span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0"
+                 aria-labelledby="notificationDropdown">
+                <a class="dropdown-item py-3 border-bottom">
+                    <p class="mb-0 fw-medium float-start">You have 4 new notifications </p>
+                    <span class="badge badge-pill badge-primary float-end">View all</span>
+                </a>
+                <a class="dropdown-item preview-item py-3">
+                    <div class="preview-thumbnail">
+                        <i class="mdi mdi-alert m-auto text-primary"></i>
+                    </div>
+                    <div class="preview-item-content">
+                        <h6 class="preview-subject fw-normal text-dark mb-1">Application Error</h6>
+                        <p class="fw-light small-text mb-0"> Just now </p>
+                    </div>
+                </a>
+                <a class="dropdown-item preview-item py-3">
+                    <div class="preview-thumbnail">
+                        <i class="mdi mdi-lock-outline m-auto text-primary"></i>
+                    </div>
+                    <div class="preview-item-content">
+                        <h6 class="preview-subject fw-normal text-dark mb-1">Settings</h6>
+                        <p class="fw-light small-text mb-0"> Private message </p>
+                    </div>
+                </a>
+                <a class="dropdown-item preview-item py-3">
+                    <div class="preview-thumbnail">
+                        <i class="mdi mdi-airballoon m-auto text-primary"></i>
+                    </div>
+                    <div class="preview-item-content">
+                        <h6 class="preview-subject fw-normal text-dark mb-1">New user registration</h6>
+                        <p class="fw-light small-text mb-0"> 2 days ago </p>
+                    </div>
+                </a>
+            </div>
+        </li>
+        // Messages
+        <li class="nav-item dropdown">
+            <a class="nav-link count-indicator" id="messagesDropdown" href="#" data-bs-toggle="dropdown">
+                <i class="mdi mdi-email-multiple-outline icon-lg"></i>
+                <span class="count"></span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0"
+                 aria-labelledby="messagesDropdown">
+                <a class="dropdown-item py-3">
+                    <p class="mb-0 fw-medium float-start">You have 7 unread mails </p>
+                    <span class="badge badge-pill badge-primary float-end">View all</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                        <img src="~/img/profile/pictures/face21.jpg" alt="image" class="img-sm profile-pic">
+                    </div>
+                    <div class="preview-item-content flex-grow py-2">
+                        <p class="preview-subject ellipsis fw-medium text-dark">Marian Garner </p>
+                        <p class="fw-light small-text mb-0"> The meeting is cancelled </p>
+                    </div>
+                </a>
+                <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                        <img src="~/img/profile/pictures/face22.jpg" alt="image" class="img-sm profile-pic">
+                    </div>
+                    <div class="preview-item-content flex-grow py-2">
+                        <p class="preview-subject ellipsis fw-medium text-dark">David Grey </p>
+                        <p class="fw-light small-text mb-0"> The meeting is cancelled </p>
+                    </div>
+                </a>
+                <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                        <img src="~/img/profile/pictures/face23.jpg" alt="image" class="img-sm profile-pic">
+                    </div>
+                    <div class="preview-item-content flex-grow py-2">
+                        <p class="preview-subject ellipsis fw-medium text-dark">Travis Jenkins </p>
+                        <p class="fw-light small-text mb-0"> The meeting is cancelled </p>
+                    </div>
+                </a>
+            </div>
+        </li>
+        // Profile
+        <li class="nav-item dropdown d-none d-lg-block user-dropdown">
+            <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                <img class="img-xs rounded-circle" src="@currentUser.AvatorFileUrl" alt="profile image">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                <div class="dropdown-header text-center">
+                    <img class="img-md rounded-circle" src="@currentUser.AvatorFileUrl" alt="profile image">
+                    <p class="mb-1 mt-3 fw-semibold">@currentUser.FullNames</p>
+                    <p class="fw-light text-muted mb-0">@currentUser.UserName</p>
+                </div>
+                <a class="dropdown-item" asp-area="UserRegistry" asp-page="/Manage/Profile">
+                    <i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile
+                </a>
+                <a class="dropdown-item" asp-area="UserRegistry" asp-page="/Manage/Notifications">
+                    <i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i> Notifications
+                    <span class="badge badge-pill badge-info">@currentUser.AccessFailedCount</span>
+                </a>
+                <a class="dropdown-item" asp-area="UserRegistry" asp-page="/Manage/Notifications">
+                    <i class="dropdown-item-icon mdi mdi-email-multiple-outline text-primary me-2"></i> Message Inbox
+                    <span class="badge badge-pill badge-warning">@currentUser.AccessFailedCount</span>
+                </a>
+                <a class="dropdown-item" asp-area="UserRegistry" asp-page="/Manage/ChangePassword">
+                    <i class="dropdown-item-icon mdi mdi-account-key-outline text-primary me-2"></i> Change Password
+                </a>
+                <a class="dropdown-item" asp-area="UserRegistry" asp-page="/Manage/TwoFactorAuthentication">
+                    <i class="dropdown-item-icon mdi mdi-two-factor-authentication text-primary me-2"></i> 2FA
+                </a>
+                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+                    <button class="dropdown-item" id="logout" type="submit">
+                        <i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Logout
+                    </button>
+                </form>
+            </div>
+        </li>
+    }
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">
+            <i class="mdi mdi-power text-success me-2"></i>Login
+        </a>
+    </li>
+}

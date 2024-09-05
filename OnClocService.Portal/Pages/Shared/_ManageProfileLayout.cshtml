@@ -1,0 +1,27 @@
+﻿@{
+    if (ViewData.TryGetValue("PageLayout", out var mainLayout) && mainLayout != null)
+    {
+        Layout = mainLayout.ToString();
+    }
+    else
+    {
+        Layout = "_PageLayout";
+    }
+}
+
+@section Styles {
+    @RenderSection("Styles", required: false)
+}
+
+<div class="row">
+    <div class="col-md-10">
+        @RenderBody()
+    </div>
+    <div class="col-md-2">
+        <partial name="_ManageProfileNavigation" />
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}
