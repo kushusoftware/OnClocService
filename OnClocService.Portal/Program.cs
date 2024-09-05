@@ -8,13 +8,13 @@ builder.AddInitialInfrastructure();
 
 builder.AddBasicInfrastructure();
 
+builder.AddOnClocJwtAuthentication();
+
 builder.Services.AddInfrastructureServices();
 
 builder.Services.AddPortalCookieConfiguration();
 
 builder.Services.AddOnClocAuthenticationServices();
-
-builder.AddOnClocJwtAuthentication();
 
 builder.Services.AddOnClocAuthorizationServices();
 

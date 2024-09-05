@@ -101,7 +101,11 @@ public static class SystemsServiceCollections
         var jwtOptionsSection = builder.Configuration.GetSection("Jwt");
         var jwtOptions = jwtOptionsSection.Get<SystemsJwtOptions>();
         if (jwtOptions != null)
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            builder.Services.AddAuthentication(jwt =>
+            {
+                jwt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                jwt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
                 .AddJwtBearer(options =>
                 {
                     var jwtkey = Encoding.Default.GetBytes(jwtOptions.Key);
