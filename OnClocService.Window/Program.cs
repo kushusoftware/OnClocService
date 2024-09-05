@@ -1,11 +1,18 @@
+using OnClocService.Infrastructure.Extensions.Systems;
+using OnClocService.Window.Extensions.Systems;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.AddBasicInfrastructure();
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddOnClocAuthenticationServices();
+
+builder.Services.AddOnClocAuthorizationServices();
+
+builder.AddOnClocJwtAuthentication();
+
+builder.AddWindowPresentation();
 
 var app = builder.Build();
 
@@ -18,8 +25,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
+
 app.UseAuthorization();
 
+app.UseSession();
+
 app.MapControllers();
+
+app.UseSecurityCredentials();
 
 app.Run();

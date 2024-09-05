@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -7,7 +7,28 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OnClocService.Infrastructure\OnClocService.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\CustomerRegistry\" />
+    <Folder Include="Controllers\EquipmentRegistry\" />
+    <Folder Include="Controllers\PaymentRegistry\" />
+    <Folder Include="Controllers\TechnicianRegistry\" />
+    <Folder Include="Controllers\TicketRegistry\" />
+    <Folder Include="Controllers\TravelRegistry\" />
+    <Folder Include="Extensions\CustomerRegistry\" />
+    <Folder Include="Extensions\EquipmentRegistry\" />
+    <Folder Include="Extensions\PaymentRegistry\" />
+    <Folder Include="Extensions\TaskRegistry\" />
+    <Folder Include="Extensions\TechnicianRegistry\" />
+    <Folder Include="Extensions\TicketRegistry\" />
+    <Folder Include="Extensions\TravelRegistry\" />
+    <Folder Include="Extensions\UserRegistry\" />
   </ItemGroup>
 
   <ItemGroup>

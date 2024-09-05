@@ -34,7 +34,6 @@ public static class SystemsServiceCollections
     {
         services.AddAutoMapper(Assembly.GetAssembly(typeof(SystemsServiceCollections)));
 
-        services.AddHttpContextAccessor();
 
         services.AddScoped<IApplicationOptionsService, ApplicationOptionsHandler>();
         services.AddScoped<ApplicationOptionsService>();
@@ -44,9 +43,6 @@ public static class SystemsServiceCollections
 
         services.AddScoped<IEmailOptionsService, EmailOptionsHandler>();
         services.AddScoped<EmailOptionsService>();
-
-        services.AddScoped<IJwtOptionsService, JwtOptionsHandler>();
-        services.AddScoped<JwtOptionsService>();
 
         services.AddScoped<ILicenseOptionsService, LicenseOptionsHandler>();
         services.AddScoped<LicenseOptionsService>();
@@ -63,6 +59,8 @@ public static class SystemsServiceCollections
 
     public static void AddOnClocAuthenticationServices(this IServiceCollection services)
     {
+        services.AddHttpContextAccessor();
+
         services.AddScoped<IUserContextService, UserServiceHandler>();
         services.AddScoped<UserContextService>();
 
@@ -97,6 +95,9 @@ public static class SystemsServiceCollections
 
     public static void AddOnClocJwtAuthentication(this WebApplicationBuilder builder)
     {
+        builder.Services.AddScoped<IJwtOptionsService, JwtOptionsHandler>();
+        builder.Services.AddScoped<JwtOptionsService>();
+
         var jwtOptionsSection = builder.Configuration.GetSection("Jwt");
         var jwtOptions = jwtOptionsSection.Get<SystemsJwtOptions>();
         if (jwtOptions != null)
@@ -118,26 +119,14 @@ public static class SystemsServiceCollections
                         ClockSkew = TimeSpan.Zero
                     };
                 });
-    }
 
-    public static void AddInfrastructureAuthentication(this IServiceCollection services)
-    {
-        services.AddIdentity<SystemsUser, SystemsRole>()
+        builder.Services.AddIdentity<SystemsUser, SystemsRole>()
             .AddRoles<SystemsRole>()
             .AddEntityFrameworkStores<OnClocDataStorageContext>()
             .AddDefaultTokenProviders();
 
-        services.ConfigureApplicationCookie(options =>
-        {
-            options.LoginPath = "/Identity/Account/Login";
-            options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-            options.LogoutPath = "/Identity/Account/Logout";
-            options.SlidingExpiration = true;
-            options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-        });
-
-        services.AddDistributedMemoryCache();
-        services.AddSession(options =>
+        builder.Services.AddDistributedMemoryCache();
+        builder.Services.AddSession(options =>
         {
             options.Cookie.HttpOnly = true;
             options.Cookie.IsEssential = true;
@@ -146,7 +135,19 @@ public static class SystemsServiceCollections
             options.IdleTimeout = TimeSpan.FromMinutes(5);
         });
 
-        services.AddControllers();
+        builder.Services.AddControllers();
+    }
+
+    public static void AddPortalCookieConfiguration(this IServiceCollection services)
+    {
+        services.ConfigureApplicationCookie(options =>
+        {
+            options.LoginPath = "/Identity/Account/Login";
+            options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+            options.LogoutPath = "/Identity/Account/Logout";
+            options.SlidingExpiration = true;
+            options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+        });
     }
 
     public static void AddBasicInfrastructure(this WebApplicationBuilder builder)

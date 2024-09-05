@@ -15,6 +15,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Extensions\CustomerRegistry\" />
+    <Folder Include="Extensions\EquipmentRegistry\" />
+    <Folder Include="Extensions\PaymentRegistry\" />
+    <Folder Include="Extensions\TaskRegistry\" />
+    <Folder Include="Extensions\TechnicianRegistry\" />
+    <Folder Include="Extensions\TravelRegistry\" />
+    <Folder Include="Extensions\UserRegistry\" />
     <Folder Include="Handlers\CustomerRegistry\" />
     <Folder Include="Handlers\EquipmentRegistry\" />
     <Folder Include="Handlers\PaymentRegistry\" />

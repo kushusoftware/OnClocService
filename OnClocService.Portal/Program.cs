@@ -10,7 +10,7 @@ builder.AddBasicInfrastructure();
 
 builder.Services.AddInfrastructureServices();
 
-builder.Services.AddInfrastructureAuthentication();
+builder.Services.AddPortalCookieConfiguration();
 
 builder.Services.AddOnClocAuthenticationServices();
 
